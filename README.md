@@ -1,11 +1,117 @@
-<div align="center">
+# 🚀 الوكيل الذكي المتكامل (AI Agent Pro) - دليل المطور
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+هذا المشروع عبارة عن تطبيق ويب متقدم مبني باستخدام **React** و **Vite** و **TypeScript**، يعتمد على تقنيات الذكاء الاصطناعي من Google Gemini وأحدث نماذج AI الأخرى.
 
-  <h1>Built with AI Studio</h2>
+---
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## 🛠️ المتطلبات الأساسية (Prerequisites)
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+قبل البدء، تأكد من تثبيت البرامج التالية على جهازك:
 
-</div>
+1.  **Node.js**: (الإصدار 18 أو أحدث) - [تحميل من هنا](https://nodejs.org/).
+2.  **Git**: لإدارة النسخ والرفع - [تحميل من هنا](https://git-scm.com/).
+3.  **محرر أكواد**: ننصح باستخدام [VS Code](https://code.visualstudio.com/).
+4.  **مفتاح API**: تحتاج إلى مفتاح من [Google AI Studio](https://aistudio.google.com/app/apikey).
+
+---
+
+## 💻 أولاً: التشغيل على الجهاز الشخصي (Local Development)
+
+اتبع هذه الخطوات لتشغيل المشروع على جهازك:
+
+### 1. تحميل المشروع وتثبيت المكتبات
+افتح التيرمينال (Terminal) أو موجه الأوامر في مجلد المشروع ونفذ الأوامر التالية:
+
+```bash
+# تثبيت جميع المكتبات المطلوبة (الموجودة في package.json)
+npm install
+```
+
+### 2. إعداد مفاتيح الربط (Environment Variables)
+لكي يعمل الذكاء الاصطناعي، يجب إعداد مفتاح API.
+1. قم بإنشاء ملف جديد في المجلد الرئيسي للمشروع (بجانب `package.json`) وسمِّه `.env`.
+2. افتح الملف واكتب بداخله الكود التالي (استبدل `YOUR_KEY` بمفتاحك الحقيقي):
+
+```env
+API_KEY=AIzaSyDxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+### 3. تشغيل السيرفر المحلي
+الآن أنت جاهز لتشغيل التطبيق:
+
+```bash
+npm run dev
+```
+بعد تنفيذ الأمر، سيظهر لك رابط (غالباً `http://localhost:5173`)، قم بفتحه في المتصفح.
+
+---
+
+## ⚙️ ثانياً: تطوير وتعديل البرنامج
+
+هيكلية المشروع مصممة لتكون سهلة التعديل. إليك أهم الملفات:
+
+*   **`constants.tsx`**:
+    *   يحتوي على تعريف **الوكلاء (Agents)** (مثل: المدير الشامل، المبرمج، الخ).
+    *   يمكنك تعديل `systemInstruction` لتغيير شخصية الذكاء الاصطناعي أو تعليماته.
+    *   يمكنك إضافة نماذج جديدة في `PROVIDERS_INFO`.
+
+*   **`services/geminiService.ts`**:
+    *   المكان الذي يتم فيه الاتصال الفعلي بـ Google Gemini API.
+    *   إذا أردت تعديل طريقة استدعاء الصور أو الفيديو، عدل هنا.
+
+*   **`index.tsx`**:
+    *   الملف الرئيسي الذي يجمع واجهة المستخدم ومنطق التطبيق.
+
+*   **`styles`**:
+    *   التصميم يعتمد على **Tailwind CSS**، يمكنك تعديل الألوان والفئات مباشرة في ملفات `.tsx`.
+
+---
+
+## ☁️ ثالثاً: الرفع والنشر على Netlify (Deployment)
+
+المشروع مجهز بملفات `netlify.toml` و `vite.config.ts` لضمان نشر سلس.
+
+### الطريقة الأفضل (عبر GitHub - مستحسن):
+هذه الطريقة تضمن تحديث الموقع تلقائياً عند تعديل الكود.
+
+1.  **رفع الكود على GitHub**:
+    *   أنشئ مستودع جديد (Repository) على GitHub.
+    *   ارفع ملفات المشروع عليه.
+
+2.  **ربط Netlify بـ GitHub**:
+    *   اذهب إلى [Netlify](https://www.netlify.com/) وسجل الدخول.
+    *   اضغط على **"Add new site"** ثم **"Import an existing project"**.
+    *   اختر **GitHub** ثم اختر المستودع الخاص بمشروعك.
+
+3.  **إعدادات البناء (Build Settings)**:
+    *   سيكتشف Netlify الإعدادات تلقائياً بفضل ملف `netlify.toml`.
+    *   تأكد أن:
+        *   **Build command**: `npm run build`
+        *   **Publish directory**: `dist`
+
+4.  **أهم خطوة: إضافة مفتاح API**:
+    *   قبل الضغط على Deploy، اضغط على **"Site settings"** أو **"Environment variables"**.
+    *   اضغط **"Add a variable"**.
+    *   **Key**: `API_KEY`
+    *   **Value**: (ضع مفتاح Google Gemini الخاص بك هنا).
+
+5.  **النشر**:
+    *   اضغط **Deploy site**. خلال دقيقة سيعمل موقعك ومعه ميزات الذكاء الاصطناعي.
+
+---
+
+### الطريقة اليدوية (بدون GitHub):
+1.  في جهازك، نفذ الأمر: `npm run build`.
+2.  سيظهر مجلد جديد اسمه `dist`.
+3.  اذهب إلى موقع Netlify، وسجل الدخول.
+4.  في لوحة التحكم، ستجد منطقة مكتوب عليها "Drag and drop your site output folder here".
+5.  اسحب مجلد `dist` وأفلته هناك.
+6.  بعد الرفع، اذهب فوراً إلى **Site Settings > Environment Variables** وأضف `API_KEY` كما في الخطوة السابقة لكي يعمل الذكاء الاصطناعي.
+
+---
+
+## ❓ حل المشاكل الشائعة
+
+*   **خطأ: `process is not defined`**: تأكد أنك تستخدم `vite.config.ts` المرفق مع المشروع، حيث قمنا بضبط إعدادات `define` لتعريف المتغيرات البيئية.
+*   **الموقع يعمل لكن الذكاء الاصطناعي لا يرد**: تأكد من أنك أضفت `API_KEY` في إعدادات Netlify بشكل صحيح، وأن المفتاح فعال وفيه رصيد (أو ضمن الباقة المجانية).
+*   **خطأ في التثبيت**: تأكد من تحديث Node.js إلى آخر إصدار وحذف مجلد `node_modules` ثم تنفيذ `npm install` مرة أخرى.
