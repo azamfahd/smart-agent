@@ -44,6 +44,7 @@ export type ModelProvider = 'gemini' | 'openai' | 'deepseek' | 'anthropic' | 'gr
 
 export interface ProviderConfig {
   apiKey: string;
+  userApiKey?: string;
   baseUrl?: string;
   enabled: boolean;
   selectedModel: string;

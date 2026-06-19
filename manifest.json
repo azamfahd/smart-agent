@@ -1,25 +1,25 @@
 
 {
-  "name": "الوكيل الذكي برو",
-  "short_name": "AI Agent",
-  "description": "منصة ذكاء اصطناعي احترافية شاملة",
-  "start_url": ".",
+  "name": "الوكيل الذكي المتكامل",
+  "short_name": "الوكيل الذكي",
+  "description": "منصة ذكاء اصطناعي احترافية شاملة للمهام المتعددة",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#05070a",
   "theme_color": "#6366f1",
   "orientation": "any",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/1698/1698535.png",
+      "src": "./app-icon.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/1698/1698535.png",
+      "src": "./app-icon.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }

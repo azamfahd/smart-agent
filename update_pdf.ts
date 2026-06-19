@@ -14,6 +14,15 @@ const stateAdditions = `
 
     const flushTable = (keyPrefix: string) => {
       if (tableRows.length > 0 || tableHeaders.length > 0) {
+        const maxCols = Math.max(tableHeaders.length, ...tableRows.map(r => r.length));
+        tableHeaders = [...tableHeaders];
+        while (tableHeaders.length < maxCols) tableHeaders.push(' ');
+        tableRows = tableRows.map(row => {
+          const newRow = [...row];
+          while (newRow.length < maxCols) newRow.push(' ');
+          return newRow.slice(0, maxCols);
+        });
+
         renderedElements.push(
           <div key={\`table-wrapper-\${keyPrefix}\`} className="my-6 overflow-x-auto rounded-xl border border-slate-200 shadow-sm" style={{ pageBreakInside: 'avoid' }}>
             <table className="w-full text-sm text-right text-slate-800 border-collapse">

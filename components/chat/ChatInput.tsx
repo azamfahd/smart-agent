@@ -49,7 +49,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
         }
         break;
       case 'research':
-        modifiedText = `أريد كتابة هيكلية بحث أكاديمي متكامل حول موضوع: ____________\nيرجى تقسيم البحث إلى: المقدمة، الأهداف، المنهجية المتبعة، المراجعة الأدبية، والنتائج مع اقتراح مصادر عربية وأجنبية موثقة لـ PDF.`;
+        modifiedText = `أريد كتابة هيكلية بحث أكاديمي متكامل حول موضوع: ____________\nيرجى تقسيم البحث إلى: المقدمة، الأهداف، المنهجية المتبعة، المراجعة الأدبية، والنتائج مع اقتراح مصادر عربية وأجنبية موثقة.`;
         break;
       case 'table':
         if (!input.trim()) {
@@ -85,23 +85,23 @@ const ChatInput: React.FC<ChatInputProps> = ({
   }, [showSmartMenu]);
 
   return (
-    <div className="p-4 md:p-6 bg-[#020617] border-t border-white/5 shrink-0 z-20 relative radial-glow-input">
-      <div className="max-w-4xl mx-auto space-y-3 relative">
+    <div className="p-3 sm:p-4 md:p-6 bg-[#070b1c]/75 backdrop-blur-xl border-t border-white/5 shrink-0 z-20 relative pb-[calc(12px+env(safe-area-inset-bottom))]">
+      <div className="max-w-4xl mx-auto space-y-2 sm:space-y-3 relative">
         
         {/* FILE PREVIEW PANEL */}
         {uploadedFiles.length > 0 && (
           <div className="flex gap-3 mb-2 overflow-x-auto pb-2 custom-scrollbar animate-slideDown">
             {uploadedFiles.map((f, i) => (
-              <div key={i} className="relative w-20 h-20 rounded-2xl overflow-hidden border-2 border-indigo-500/40 group shrink-0 shadow-lg group">
+              <div key={i} className="relative w-20 h-20 rounded-2xl overflow-hidden border-2 border-amber-500 shadow-lg shadow-black/40 group shrink-0">
                 <img src={`data:${f.mimeType};base64,${f.data}`} className="w-full h-full object-cover" alt="upload" />
                 <button 
                   onClick={() => onFileDelete(i)} 
-                  className="absolute inset-0 bg-black/70 flex items-center justify-center text-red-400 group-hover:opacity-100 opacity-0 transition-opacity"
+                  className="absolute inset-0 bg-black/80 flex items-center justify-center text-rose-400 opacity-0 group-hover:opacity-100 transition-opacity"
                   title="حذف الملف"
                 >
                   <i className="fas fa-trash text-lg"></i>
                 </button>
-                <div className="absolute top-1 left-1 bg-black/60 rounded-full w-4 h-4 flex items-center justify-center text-[8px] text-white">
+                <div className="absolute top-1 left-1 bg-amber-500 rounded-full w-4 h-4 flex items-center justify-center text-[8px] text-[#070b1c] font-black">
                   {i + 1}
                 </div>
               </div>
@@ -110,7 +110,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
         )}
         
         {/* THE MAIN PREMIUM GLASS INPUT BAR */}
-        <div className="relative flex items-end gap-2 sm:gap-3 bg-gradient-to-b from-[#1e293b]/50 to-[#0f172a]/80 backdrop-blur-2xl border border-white/10 rounded-[1.8rem] p-2 sm:p-3 focus-within:ring-2 focus-within:ring-indigo-500/40 focus-within:border-indigo-500/40 transition-all duration-300 shadow-2xl">
+        <div className="relative flex items-end gap-2 sm:gap-3 bg-[#0d1430]/75 border border-white/10 rounded-[1.8rem] p-2 sm:p-3 focus-within:ring-2 focus-within:ring-amber-500/35 focus-within:border-amber-400 transition-all duration-300 shadow-inner shadow-black/40 card-3d">
           <input 
             type="file" 
             ref={fileInputRef} 
@@ -122,7 +122,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
           <div className="flex items-center gap-1 sm:gap-2 shrink-0 h-[44px]">
             <button 
               onClick={() => fileInputRef.current?.click()}
-              className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl hover:bg-white/10 text-slate-400 hover:text-indigo-400 transition-all flex items-center justify-center shrink-0 border border-transparent hover:border-white/5"
+              className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-transparent text-slate-400 hover:text-amber-400 transition-all flex items-center justify-center shrink-0 border border-transparent hover:border-white/5"
               title="إرفاق صورة للتحليل البصري"
             >
               <i className="fas fa-image text-lg"></i>
@@ -132,7 +132,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
             <div className="relative smart-menu-container">
               <button 
                 onClick={() => setShowSmartMenu(!showSmartMenu)}
-                className={`w-10 h-10 sm:w-11 sm:h-11 rounded-2xl transition-all flex items-center justify-center shrink-0 border ${showSmartMenu ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30' : 'bg-transparent text-slate-400 hover:bg-white/5 border-transparent hover:border-white/5'}`}
+                className={`w-10 h-10 sm:w-11 sm:h-11 rounded-2xl transition-all flex items-center justify-center shrink-0 border ${showSmartMenu ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 'bg-transparent text-slate-400 hover:bg-white/5 border-transparent hover:border-white/5'}`}
                 title="الصياغة الذكية والنماذج"
               >
                 <i className="fas fa-magic text-base sm:text-lg"></i>
@@ -140,89 +140,95 @@ const ChatInput: React.FC<ChatInputProps> = ({
 
               {/* Dropdown Menu */}
               {showSmartMenu && (
-                <div className="absolute bottom-[calc(100%+12px)] right-0 w-64 bg-[#0f172a] border border-white/10 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-hidden z-[100] animate-fadeIn">
-                  <div className="p-3 bg-slate-900/50 border-b border-white/5">
-                    <span className="text-xs font-bold text-slate-300 flex items-center gap-2">
-                      <i className="fas fa-bolt text-amber-400"></i> اقتراحات ذكية سريعة
+                <div className="absolute bottom-[calc(100%+12px)] right-0 w-64 bg-[#0d1430]/95 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden z-[100] animate-fadeIn">
+                  <div className="p-3 bg-[#090e21] border-b border-white/5">
+                    <span className="text-xs font-black text-slate-200 flex items-center gap-2">
+                      <i className="fas fa-bolt text-amber-500"></i> اقتراحات ذكية سريعة
                     </span>
                   </div>
                   <div className="p-2 flex flex-col gap-1 max-h-[300px] overflow-y-auto custom-scrollbar">
                     <button
+                      type="button"
                       onClick={() => applySmartTool('refine')}
                       className="flex items-center gap-3 w-full text-right px-3 py-2.5 rounded-xl hover:bg-white/5 text-slate-300 transition-colors group"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      <div className="w-8 h-8 rounded-lg bg-slate-900 border border-white/5 text-slate-400 flex items-center justify-center shrink-0 group-hover:bg-amber-500/20 group-hover:text-amber-400 group-hover:border-amber-500/30 transition-colors">
                         <i className="fas fa-signature text-sm"></i>
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-xs font-bold text-slate-200">تحسين النص الأكاديمي</span>
-                        <span className="text-[9px] text-slate-500">صياغة بليغة ومنسقة وتدقيق شامل</span>
+                        <span className="text-xs font-extrabold text-white">تحسين النص الأكاديمي</span>
+                        <span className="text-[9px] text-slate-400">صياغة بليغة ومنسقة وتدقيق شامل</span>
                       </div>
                     </button>
 
                     <button
+                      type="button"
                       onClick={() => applySmartTool('research')}
                       className="flex items-center gap-3 w-full text-right px-3 py-2.5 rounded-xl hover:bg-white/5 text-slate-300 transition-colors group"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      <div className="w-8 h-8 rounded-lg bg-slate-900 border border-white/5 text-slate-400 flex items-center justify-center shrink-0 group-hover:bg-amber-500/20 group-hover:text-amber-400 group-hover:border-amber-500/30 transition-colors">
                         <i className="fas fa-book-reader text-sm"></i>
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-xs font-bold text-slate-200">قالب بحث متكامل</span>
-                        <span className="text-[9px] text-slate-500">إدراج هيكلية موثقة مع المراجع</span>
+                        <span className="text-xs font-extrabold text-white">قالب بحث متكامل</span>
+                        <span className="text-[9px] text-slate-400">إدراج هيكلية موثقة مع المراجع</span>
                       </div>
                     </button>
 
                     <button
+                      type="button"
                       onClick={() => applySmartTool('table')}
                       className="flex items-center gap-3 w-full text-right px-3 py-2.5 rounded-xl hover:bg-white/5 text-slate-300 transition-colors group"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      <div className="w-8 h-8 rounded-lg bg-slate-900 border border-white/5 text-slate-400 flex items-center justify-center shrink-0 group-hover:bg-amber-500/20 group-hover:text-amber-400 group-hover:border-amber-500/30 transition-colors">
                         <i className="fas fa-table text-sm"></i>
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-xs font-bold text-slate-200">إدراج جدول مقارنة</span>
-                        <span className="text-[9px] text-slate-500">مقارنة تقنية أو علمية مفصلة الأبعاد</span>
+                        <span className="text-xs font-extrabold text-white">إدراج جدول مقارنة</span>
+                        <span className="text-[9px] text-slate-400">مقارنة تقنية أو علمية مفصلة الأبعاد</span>
                       </div>
                     </button>
 
                     <button
+                      type="button"
                       onClick={() => applySmartTool('image')}
                       className="flex items-center gap-3 w-full text-right px-3 py-2.5 rounded-xl hover:bg-white/5 text-slate-300 transition-colors group"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      <div className="w-8 h-8 rounded-lg bg-slate-900 border border-white/5 text-slate-400 flex items-center justify-center shrink-0 group-hover:bg-amber-500/20 group-hover:text-amber-400 group-hover:border-amber-500/30 transition-colors">
                         <i className="fas fa-paint-brush text-sm"></i>
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-xs font-bold text-slate-200">رسم توليدي عميق</span>
-                        <span className="text-[9px] text-slate-500">تصميم بصري دقيق حسب الوصف</span>
+                        <span className="text-xs font-extrabold text-white">رسم توليدي عميق</span>
+                        <span className="text-[9px] text-slate-400">تصميم بصري دقيق حسب الوصف</span>
                       </div>
                     </button>
 
                     <button
+                      type="button"
                       onClick={() => applySmartTool('video')}
                       className="flex items-center gap-3 w-full text-right px-3 py-2.5 rounded-xl hover:bg-white/5 text-slate-300 transition-colors group"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-red-500/10 text-red-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      <div className="w-8 h-8 rounded-lg bg-slate-900 border border-white/5 text-slate-400 flex items-center justify-center shrink-0 group-hover:bg-amber-500/20 group-hover:text-amber-400 group-hover:border-amber-500/30 transition-colors">
                         <i className="fas fa-film text-sm"></i>
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-xs font-bold text-slate-200">توليد مشهد فيديو</span>
-                        <span className="text-[9px] text-slate-500">وصف سينمائي لمشهد متحرك ديناميكي</span>
+                        <span className="text-xs font-extrabold text-white">توليد مشهد فيديو</span>
+                        <span className="text-[9px] text-slate-400">وصف سينمائي لمشهد متحرك ديناميكي</span>
                       </div>
                     </button>
-                    
+
                     {input.length > 0 && (
                       <>
                         <div className="h-px w-full bg-white/5 my-1"></div>
                         <button
+                          type="button"
                           onClick={() => applySmartTool('clear')}
-                          className="flex items-center gap-3 w-full text-right px-3 py-2 rounded-xl hover:bg-red-500/10 hover:text-red-400 text-slate-400 transition-colors group"
+                          className="flex items-center gap-3 w-full text-right px-3 py-2 rounded-xl hover:bg-rose-500/10 hover:text-rose-400 text-slate-400 transition-colors group"
                         >
-                          <div className="w-6 h-6 rounded-md bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-red-500/20 group-hover:text-red-400 transition-colors text-[10px]">
+                          <div className="w-6 h-6 rounded-md bg-slate-950 border border-white/5 flex items-center justify-center shrink-0 group-hover:bg-rose-500/25 group-hover:text-rose-400 transition-colors text-[10px]">
                             <i className="fas fa-eraser"></i>
                           </div>
-                          <span className="text-xs font-medium">مسح النص</span>
+                          <span className="text-xs font-black">مسح النص</span>
                         </button>
                       </>
                     )}
@@ -237,8 +243,8 @@ const ChatInput: React.FC<ChatInputProps> = ({
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="اسألني عن أي شيء هنا... (مثال: ارسم صقر فوق قمة جبل...)"
-            className="flex-1 bg-transparent border-none text-white placeholder-slate-500 focus:ring-0 resize-none py-3.5 max-h-[180px] min-h-[44px] custom-scrollbar text-sm md:text-base leading-relaxed px-1 sm:px-2"
+            placeholder="اسألني عن أي شيء هنا... (مثال: ارسم صقر...)"
+            className="flex-1 bg-transparent border-none text-white placeholder-slate-400 focus:ring-0 resize-none py-3 max-h-[150px] sm:max-h-[220px] min-h-[44px] custom-scrollbar text-[15px] sm:text-base leading-relaxed px-2 rounded-xl"
             dir="auto"
             rows={1}
           />
@@ -246,7 +252,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
           {/* Action Row containing characters counter and send button */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0 h-[44px] pb-0.5">
             {input.length > 0 && (
-              <span className="text-[10px] text-slate-500 font-mono hidden sm:inline-block">
+              <span className="text-[10px] text-slate-400 font-mono hidden sm:inline-block">
                 {input.length} حرفاً
               </span>
             )}
@@ -254,19 +260,16 @@ const ChatInput: React.FC<ChatInputProps> = ({
             <button 
               onClick={onSend}
               disabled={(!input.trim() && uploadedFiles.length === 0) || isThinking}
-              className={`w-10 h-10 sm:w-11 sm:h-11 rounded-2xl flex items-center justify-center transition-all shrink-0 ${
+              className={`w-10 h-10 sm:w-11 sm:h-11 rounded-2xl flex items-center justify-center transition-all shrink-0 card-3d ${
                 input.trim() || uploadedFiles.length > 0 
-                ? 'bg-indigo-600 text-white shadow-xl shadow-indigo-600/30 hover:scale-105 active:scale-95' 
-                : 'bg-white/5 text-slate-500 cursor-not-allowed'
+                ? 'bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white shadow-[0_4px_15px_rgba(245,158,11,0.3)] hover:shadow-[0_4px_22px_rgba(245,158,11,0.45)]' 
+                : 'bg-white/5 border border-white/5 text-slate-600 cursor-not-allowed'
               }`}
             >
               <i className={`fas ${isThinking ? 'fa-spinner fa-spin' : 'fa-paper-plane'}`}></i>
             </button>
           </div>
         </div>
-        
-
-
       </div>
     </div>
   );
